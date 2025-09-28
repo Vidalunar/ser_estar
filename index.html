@@ -1,211 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Ser vs estar — Reto rápido (21) / Reto Pro (50)</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
 
-<!-- Tailwind CDN (necesario para la app) -->
+<!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-/* ===== Estilos base de la plantilla ===== */
-:root { --maxw: 1200px; --pad: 20px; --bg:#fff; --fg:#111; --brand:#1e88e5; }
-@media (prefers-color-scheme: dark){ :root{ --bg:#0e0f12; --fg:#f2f2f2; --brand:#64b5f6; } }
-html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif;}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:var(--pad);}
-h1{margin:0 0 12px;color:var(--brand)}
-.card{border:1px solid #ddd;border-radius:12px;padding:16px;background:rgba(255,255,255,0.6);backdrop-filter:saturate(120%) blur(2px);}
-@media (prefers-color-scheme: dark){ .card{ border-color:#2a2a2a; background:rgba(20,20,20,0.6);} }
-button{min-height:44px;min-width:44px;padding:10px 16px;border-radius:10px;border:1px solid transparent;background:var(--brand);color:#fff;font-weight:600}
-button:active{transform:scale(0.98)}
-input,select,textarea{min-height:44px;padding:10px 12px;width:100%;border-radius:10px;border:1px solid #ccc;background:#fff;color:#111}
-@media (prefers-color-scheme: dark){ input,select,textarea{background:#151515;color:#eee;border-color:#333} }
-img{max-width:100%;height:auto}
-.grid{display:grid;gap:12px}
-.mt{margin-top:14px}
-footer{margin-top:24px;font-size:14px;opacity:.8}
-/* ZONAS A EDITAR EN COLOR PARA IDENTIFICAR RÁPIDO (puedes cambiar --brand) */
-
-/* ===== Estilos específicos de la app (copiados del archivo original) ===== */
-:root{ --ink:#0a2a66; --blue1:#a9c4db; --blue2:#d2e2f0; }
-body.app-bg{min-height:100vh;background:linear-gradient(180deg,var(--blue1),var(--blue2));color:var(--ink);}
-.card-app{background:rgba(255,255,255,.78);backdrop-filter:blur(2px);border:1px solid rgba(0,0,0,.12);border-radius:18px;}
-.btn-app{border-radius:14px;padding:.7rem 1rem;font-weight:800;border:1px solid rgba(0,0,0,.12);box-shadow:0 6px 14px rgba(0,0,0,.12);}
-.btn-yellow{background:linear-gradient(180deg,#ffe37a,#ffd548);}
-.btn-dark{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.28));color:#0a2a66;}
-.btn-teal{background:linear-gradient(180deg,#22c7b6,#0fa4a0);color:#05393a;}
-/* Columna fija izquierda (sello + botones + puntuación) */
-.side{position:fixed;left:.75rem;top:.75rem;z-index:5;width:clamp(140px,20vmin,200px);}
-.side .score{margin-top:.6rem}
-/* Evita solapes con la columna izquierda en pantallas anchas */
-.play-wrap{width:min(1200px,100%);margin:0 auto;padding:1rem;}
-@media (min-width:1024px){ .play-wrap{padding-left:clamp(240px, 24vmin + 44px, 340px);} }
-/* Blank */
-.blank{min-width:5.2rem;display:inline-flex;align-items:center;justify-content:center;padding:.1rem .5rem;border-radius:.6rem;background:#fde047;color:#111;font-weight:800}
-/* Fin de reto compacto */
-.end-compact h3{margin:0 0 .4rem 0}
-.end-compact .row{display:flex;gap:1rem;flex-wrap:wrap;margin:.2rem 0}
-.end-compact .row > div{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);border-radius:.6rem;padding:.35rem .6rem;font-weight:700}
-/* Tooltip */
-.tip{position:absolute;transform:translate(-50%,-110%);white-space:nowrap;background:#fde047;border:1px solid rgba(0,0,0,.12);border-radius:.5rem;padding:.2rem .45rem;font-size:.75rem}
-/* En tablet/móvil la barra izquierda pasa arriba */
-@media (max-width:1023.98px){
-  .side{position:static;width:auto;display:grid;grid-template-columns:auto 1fr 1fr;gap:.6rem;align-items:start;margin:.6rem .75rem 0}
-  .play-wrap{padding-left:1rem}
-}
+  :root{ --ink:#0a2a66; --blue1:#a9c4db; --blue2:#d2e2f0; }
+  body{min-height:100vh;background:linear-gradient(180deg,var(--blue1),var(--blue2));color:var(--ink);}
+  .card{background:rgba(255,255,255,.78);backdrop-filter:blur(2px);border:1px solid rgba(0,0,0,.12);border-radius:18px;}
+  .btn{border-radius:14px;padding:.7rem 1rem;font-weight:800;border:1px solid rgba(0,0,0,.12);box-shadow:0 6px 14px rgba(0,0,0,.12);}
+  .btn-yellow{background:linear-gradient(180deg,#ffe37a,#ffd548);}
+  .btn-dark{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.28));color:#0a2a66;}
+  .btn-teal{background:linear-gradient(180deg,#22c7b6,#0fa4a0);color:#05393a;}
+  /* Columna fija izquierda (sello + botones + puntuación) */
+  .side{position:fixed;left:.75rem;top:.75rem;z-index:5;width:clamp(140px,20vmin,200px);}
+  .side .score{margin-top:.6rem}
+  /* Evita solapes con la columna izquierda en pantallas anchas */
+  .wrap{width:min(1200px,100%);margin:0 auto;padding:1rem;}
+  @media (min-width:1024px){ .wrap{padding-left:clamp(240px, 24vmin + 44px, 340px);} }
+  /* Blank */
+  .blank{min-width:5.2rem;display:inline-flex;align-items:center;justify-content:center;padding:.1rem .5rem;border-radius:.6rem;background:#fde047;color:#111;font-weight:800}
+  /* Fin de reto compacto */
+  .end-compact h3{margin:0 0 .4rem 0}
+  .end-compact .row{display:flex;gap:1rem;flex-wrap:wrap;margin:.2rem 0}
+  .end-compact .row > div{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);border-radius:.6rem;padding:.35rem .6rem;font-weight:700}
+  .end-compact .actions{margin-top:.6rem;display:flex;flex-direction:column;gap:.5rem}
+  /* Tooltip */
+  .tip{position:absolute;transform:translate(-50%,-110%);white-space:nowrap;background:#fde047;border:1px solid rgba(0,0,0,.12);border-radius:.5rem;padding:.2rem .45rem;font-size:.75rem}
+  /* En tablet/móvil la barra izquierda pasa arriba */
+  @media (max-width:1023.98px){
+    .side{position:static;width:auto;display:grid;grid-template-columns:auto 1fr 1fr;gap:.6rem;align-items:start;margin:.6rem .75rem 0}
+    .wrap{padding-left:1rem}
+  }
 </style>
 </head>
-<body class="app-bg">
+<body>
 
-<main class="wrap">
-  <h1>Ser vs estar</h1>
+<!-- Columna izquierda -->
+<div class="side">
+  <img src="Copilot_20250920_121301.png" alt="Sello PR" class="w-full aspect-square rounded-full shadow-xl border border-white/80"/>
+  <button id="quickBtn" class="btn btn-teal mt-2 w-full">Reto Rápido</button>
+  <button id="proBtn"   class="btn btn-dark mt-2 w-full">Reto Pro</button>
 
-  <section class="card grid">
-    <p><strong>Objetivos de aprendizaje:</strong></p>
-    <ul>
-      <li>Practicar la conjugación completa de <em>ser</em> y <em>estar</em> en presente.</li>
-      <li>Identificar y aplicar los usos de <em>ser</em> (origen, profesión, características, eventos).</li>
-      <li>Identificar y aplicar los usos de <em>estar</em> (ubicación, estados, resultados).</li>
+  <div class="card score p-3">
+    <h3 class="font-extrabold text-base mb-2">🎯 Puntuación</h3>
+    <div class="grid grid-cols-2 gap-2 text-sm mb-2">
+      <div class="text-center bg-white rounded-lg p-2 border"><div class="text-xs opacity-80">Puntos</div>
+        <div class="text-xl font-extrabold"><span id="pointsSide">0</span><span id="pointsMaxSide" class="opacity-70 text-sm">/21</span></div>
+      </div>
+      <div class="text-center bg-white rounded-lg p-2 border"><div class="text-xs opacity-80">Fallos</div>
+        <div class="text-xl font-extrabold" id="failsSide">0</div>
+      </div>
+    </div>
+    <ul class="text-[13px] opacity-90 space-y-1">
+      <li>✅ 1ª vez bien: <b>+1</b></li>
+      <li>↩️ Tras fallo: <b>+0,5</b></li>
+      <li>💡 Ver solución: <b>0</b></li>
     </ul>
+  </div>
+</div>
 
-    <label for="nombre">Nombre (opcional)</label>
-    <input id="nombre" type="text" placeholder="Escribe tu nombre aquí…">
-    <button id="btn">Comenzar la práctica</button>
-  </section>
+<div class="wrap">
+  <!-- Instrucciones -->
+  <div class="card p-3 mb-4">
+    <h2 class="font-extrabold text-base">🧭 Cómo usar esta app</h2>
+    <p class="text-sm opacity-90">
+      1) Abre este archivo con <b>doble clic</b> · 2) Por defecto empieza el <b>Reto Rápido (21)</b> ·
+      3) Escribe la forma correcta de <i>ser/estar</i> y pulsa <b>Comprobar</b> ·
+      4) Haz clic en cualquier palabra para ver su traducción al alemán.
+    </p>
+  </div>
 
-  <section class="card grid mt">
-    <h2>Actividad: Reto rápido y Reto Pro</h2>
-    <p>Selecciona el tipo de reto, escribe la forma correcta de <em>ser/estar</em> en cada oración y comprueba tu respuesta. Haz clic en cualquier palabra para ver su traducción al alemán.</p>
+  <header class="mb-4">
+    <h1 class="text-2xl md:text-4xl font-extrabold leading-tight">Ser vs estar</h1>
+    <div class="text-xl md:text-3xl font-extrabold">¿Qué reto aceptas hoy?</div>
+  </header>
 
-    <!-- ======= CONTENIDO PRINCIPAL: App incrustada ======= -->
+  <main class="grid lg:grid-cols-3 gap-6">
+    <!-- Tablero -->
+    <section class="lg:col-span-2">
+      <div class="card p-4 md:p-6 relative">
+        <div id="modeTitle" class="text-xl md:text-2xl font-extrabold mb-3">Reto Rápido — 21 oraciones</div>
 
-    <!-- Columna izquierda -->
-    <div class="side">
-      <img src="Copilot_20250920_121301.png" alt="Sello PR" class="w-full aspect-square rounded-full shadow-xl border border-white/80" onerror="this.style.display='none'"/>
-      <button id="quickBtn" class="btn-app btn-teal mt-2 w-full">Reto Rápido</button>
-      <button id="proBtn"   class="btn-app btn-dark mt-2 w-full">Reto Pro</button>
-
-      <div class="card-app score p-3">
-        <h3 class="font-extrabold text-base mb-2">🎯 Puntuación</h3>
-        <div class="grid grid-cols-2 gap-2 text-sm mb-2">
-          <div class="text-center bg-white rounded-lg p-2 border"><div class="text-xs opacity-80">Puntos</div>
-            <div class="text-xl font-extrabold"><span id="pointsSide">0</span><span id="pointsMaxSide" class="opacity-70 text-sm">/21</span></div>
+        <!-- Barra superior -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-sm opacity-80">Pregunta</span>
+            <div id="qIndex" class="font-bold">1</div><span class="opacity-60">/</span>
+            <div id="qTotal" class="opacity-90">21</div>
           </div>
-          <div class="text-center bg-white rounded-lg p-2 border"><div class="text-xs opacity-80">Fallos</div>
-            <div class="text-xl font-extrabold" id="failsSide">0</div>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2"><span>⭐</span><span id="points" class="font-bold">0</span><span id="pointsMax" class="opacity-80 text-xs">/21</span></div>
+            <div class="flex items-center gap-2"><span>❌</span><span id="fails" class="font-bold">0</span></div>
           </div>
         </div>
-        <ul class="text-[13px] opacity-90 space-y-1">
-          <li>✅ 1ª vez bien: <b>+1</b></li>
-          <li>↩️ Tras fallo: <b>+0,5</b></li>
-          <li>💡 Ver solución: <b>0</b></li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="play-wrap">
-      <!-- Instrucciones -->
-      <div class="card-app p-3 mb-4">
-        <h2 class="font-extrabold text-base">🧭 Cómo usar esta app</h2>
-        <p class="text-sm opacity-90">
-          1) Abre este archivo con <b>doble clic</b> · 2) Por defecto empieza el <b>Reto Rápido (21)</b> ·
-          3) Escribe la forma correcta de <i>ser/estar</i> y pulsa <b>Comprobar</b> ·
-          4) Haz clic en cualquier palabra para ver su traducción al alemán.
-        </p>
-      </div>
+        <div class="w-full bg-black/10 rounded-xl overflow-hidden h-3 mb-4">
+          <div id="progress" class="h-full" style="background:linear-gradient(90deg,#34d399,#a7f3d0);width:0%"></div>
+        </div>
 
-      <header class="mb-4">
-        <h1 class="text-2xl md:text-4xl font-extrabold leading-tight">Ser vs estar</h1>
-        <div class="text-xl md:text-3xl font-extrabold">¿Qué reto aceptas hoy?</div>
-      </header>
+        <!-- Oración -->
+        <div id="sentenceBox" class="text-lg md:text-2xl leading-relaxed bg-white/70 border rounded-xl p-4 md:p-6"></div>
 
-      <main class="grid lg:grid-cols-3 gap-6">
-        <!-- Tablero -->
-        <section class="lg:col-span-2">
-          <div class="card-app p-4 md:p-6 relative">
-            <div id="modeTitle" class="text-xl md:text-2xl font-extrabold mb-3">Reto Rápido — 21 oraciones</div>
+        <!-- Respuesta -->
+        <div class="mt-4 space-y-2">
+          <input id="answerInput" type="text" class="w-full rounded-xl bg-white border px-4 py-3 text-base md:text-lg outline-none focus:ring-2 focus:ring-yellow-300/60" placeholder="es / soy / estamos / estáis ..."/>
 
-            <!-- Barra superior -->
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-              <div class="flex items-center gap-2">
-                <span class="text-sm opacity-80">Pregunta</span>
-                <div id="qIndex" class="font-bold">1</div><span class="opacity-60">/</span>
-                <div id="qTotal" class="opacity-90">21</div>
-              </div>
-              <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2"><span>⭐</span><span id="points" class="font-bold">0</span><span id="pointsMax" class="opacity-80 text-xs">/21</span></div>
-                <div class="flex items-center gap-2"><span>❌</span><span id="fails" class="font-bold">0</span></div>
-              </div>
-            </div>
-
-            <div class="w-full bg-black/10 rounded-xl overflow-hidden h-3 mb-4">
-              <div id="progress" class="h-full" style="background:linear-gradient(90deg,#34d399,#a7f3d0);width:0%"></div>
-            </div>
-
-            <!-- Oración -->
-            <div id="sentenceBox" class="text-lg md:text-2xl leading-relaxed bg-white/70 border rounded-xl p-4 md:p-6"></div>
-
-            <!-- Respuesta -->
-            <div class="mt-4 space-y-2">
-              <input id="answerInput" type="text" class="w-full rounded-xl bg-white border px-4 py-3 text-base md:text-lg outline-none focus:ring-2 focus:ring-yellow-300/60" placeholder="es / soy / estamos / estáis ..."/>
-
-              <!-- 🔁 Reintentar debajo de Comprobar (restaurado) -->
-              <div class="grid md:grid-cols-[1fr_auto] gap-2">
-                <button id="checkBtn" class="btn-app btn-yellow">Comprobar</button>
-                <button id="retryBtnInline" class="btn-app btn-dark w-full md:w-auto">Reintentar ↩️</button>
-              </div>
-
-              <button id="nextBtn"  class="btn-app btn-dark w-full">Siguiente ▶</button>
-            </div>
-
-            <div id="feedback" class="mt-2 min-h-7 text-base"></div>
-
-            <div class="mt-3 flex flex-wrap items-center gap-2">
-              <button id="revealBtn" class="btn-app btn-teal w-auto">Ver solución 💡</button>
-              <button id="resetBtn"  class="btn-app btn-dark w-auto">Reiniciar 🔄</button>
-              <label class="ml-auto inline-flex items-center gap-2 text-sm"><input id="accentToggle" type="checkbox" class="accent-yellow-600" checked>Ignorar tildes</label>
-            </div>
+          <!-- 🔁 Reintentar debajo de Comprobar (restaurado) -->
+          <div class="grid md:grid-cols-[1fr_auto] gap-2">
+            <button id="checkBtn" class="btn btn-yellow">Comprobar</button>
+            <button id="retryBtnInline" class="btn btn-dark w-full md:w-auto">Reintentar ↩️</button>
           </div>
-        </section>
 
-        <!-- Diccionario -->
-        <aside class="card-app p-4 md:p-6">
-          <h2 class="text-xl font-extrabold mb-2">📚 Diccionario rápido</h2>
-          <div id="dictBox" class="rounded-xl bg-white border p-5 min-h-[220px]">
-            <p class="opacity-80">Haz clic en una palabra para ver su traducción al alemán.</p>
-          </div>
-        </aside>
-      </main>
-    </div>
-    <!-- Tooltip -->
-    <div id="tooltip" class="tip hidden"></div>
+          <button id="nextBtn"  class="btn btn-dark w-full">Siguiente ▶</button>
+        </div>
 
-  </section>
+        <div id="feedback" class="mt-2 min-h-7 text-base"></div>
 
-  <section class="card grid mt">
-    <h2>Recursos</h2>
-    <ul>
-      <li><a href="https://dle.rae.es" target="_blank" rel="noopener">Diccionario de la RAE</a></li>
-      <li><a href="https://www.wordreference.com/" target="_blank" rel="noopener">WordReference</a></li>
-    </ul>
-  </section>
+        <div class="mt-3 flex flex-wrap items-center gap-2">
+          <button id="revealBtn" class="btn btn-teal w-auto">Ver solución 💡</button>
+          <button id="resetBtn"  class="btn btn-dark w-auto">Reiniciar 🔄</button>
+          <label class="ml-auto inline-flex items-center gap-2 text-sm"><input id="accentToggle" type="checkbox" class="accent-yellow-600" checked>Ignorar tildes</label>
+        </div>
+      </div>
+    </section>
 
-  <footer>Creado por Patricia Romero · Actividad interactiva "Ser vs estar" para iPad.</footer>
-</main>
+    <!-- Diccionario -->
+    <aside class="card p-4 md:p-6">
+      <h2 class="text-xl font-extrabold mb-2">📚 Diccionario rápido</h2>
+      <div id="dictBox" class="rounded-xl bg-white border p-5 min-h-[220px]">
+        <p class="opacity-80">Haz clic en una palabra para ver su traducción al alemán.</p>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip" class="tip hidden"></div>
 
 <script>
-/* Interacción de ejemplo (no interfiere con la app) */
-document.getElementById('btn').addEventListener('click', ()=>{
-  const n = document.getElementById('nombre').value.trim() || 'clase';
-  alert(`¡Hola, ${n}! Actividad lista en iPad.`);
-});
-</script>
-
-<script>
-/* ===== LÓGICA DE LA APP (copiada y adaptada del archivo original) ===== */
-
 /* ===== Diccionario ===== */
 const DICT = {
   "yo":"ich","tú":"du","él":"er","ella":"sie","nosotros":"wir","ustedes":"Sie (Pl.)",
@@ -423,7 +360,7 @@ function openErrorsReport(){
         @media (max-width:640px){.page{padding-right:16px; padding-left:16px;}}
       </style></head>
       <body>
-        <div class="sello"><img src="Copilot_20250920_121301.png" alt="Sello Patricia Romero Educación" onerror="this.style.display='none'"></div>
+        <div class="sello"><img src="Copilot_20250920_121301.png" alt="Sello Patricia Romero Educación"></div>
         <div class="page">
           <div class="title-box"><h1>Copia en tu cuaderno las respuestas correctas</h1></div>
           <p class="subtitle">Escribe cada oración con el verbo correcto en <b>negrita</b> y corrige tu respuesta.</p>
@@ -439,20 +376,16 @@ function openErrorsReport(){
 /* Fin del juego — compacto + botones con informe */
 function endScreen(){
   const total=ACTIVE.length;
-  const nota=(function(score){const s=Number(score.toFixed(1)); if(isQuick){
-    if(s>=20.4)return"1"; if(s>=19.3)return"1-"; if(s>=18.3)return"2+"; if(s>=17.4)return"2"; if(s>=16.2)return"2-"; if(s>=15.5)return"3+"; if(s>=14.5)return"3"; if(s>=13.4)return"3-"; if(s>=12.6)return"4+"; if(s>=11.6)return"4"; if(s>=10.5)return"4-"; if(s>=9.5)return"5+"; if(s>=6.3)return"5"; if(s>=5.3)return"5-"; return"6";
-  } else {
-    if(s>=48.5)return"1"; if(s>=46.0)return"1-"; if(s>=43.5)return"2+"; if(s>=41.5)return"2"; if(s>=38.5)return"2-"; if(s>=37.0)return"3+"; if(s>=34.5)return"3"; if(s>=32.0)return"3-"; if(s>=30.0)return"4+"; if(s>=27.5)return"4"; if(s>=25.0)return"4-"; if(s>=22.5)return"5+"; if(s>=15.0)return"5"; if(s>=12.5)return"5-"; return"6";
-  }})(pts);
+  const nota=(function(score){const s=Number(score.toFixed(1)); if(isQuick){ if(s>=20.4)return"1"; if(s>=19.3)return"1-"; if(s>=18.3)return"2+"; if(s>=17.4)return"2"; if(s>=16.2)return"2-"; if(s>=15.5)return"3+"; if(s>=14.5)return"3"; if(s>=13.4)return"3-"; if(s>=12.6)return"4+"; if(s>=11.6)return"4"; if(s>=10.5)return"4-"; if(s>=9.5)return"5+"; if(s>=6.3)return"5"; if(s>=5.3)return"5-"; return"6"; } else { if(s>=48.5)return"1"; if(s>=46.0)return"1-"; if(s>=43.5)return"2+"; if(s>=41.5)return"2"; if(s>=38.5)return"2-"; if(s>=37.0)return"3+"; if(s>=34.5)return"3"; if(s>=32.0)return"3-"; if(s>=30.0)return"4+"; if(s>=27.5)return"4"; if(s>=25.0)return"4-"; if(s>=22.5)return"5+"; if(s>=15.0)return"5"; if(s>=12.5)return"5-"; return"6"; } })(pts);
 
   const box=document.createElement("div");
-  box.className="card-app p-3 md:p-4 mt-3 end-compact";
+  box.className="card p-3 md:p-4 mt-3 end-compact";
   box.innerHTML=`
     <h3 class="text-xl font-extrabold">${isQuick?"⚡ Reto rápido finalizado":"🏁 ¡Has terminado!"}</h3>
     <div class="row"><div>Puntos: <b>${pts.toFixed(1)}</b> / ${total}</div><div>Fallos: <b>${fls}</b></div><div>Tu nota: <span class="bg-yellow-300 px-2 py-[2px] rounded font-extrabold">${nota}</span></div></div>
-    <div class="actions" style="display:flex;flex-direction:column;gap:.5rem">
-      <button class="btn-app btn-dark w-full" id="playAgainBtn">${isQuick?"Volver a intentar el reto 🔄":"Jugar de nuevo 🔄"}</button>
-      <button class="btn-app btn-yellow w-full" id="errorsBtn">Estas han sido tus respuestas incorrectas, cópialas en tu cuaderno y vuelve a intentarlo</button>
+    <div class="actions">
+      <button class="btn btn-dark w-full" id="playAgainBtn">${isQuick?"Volver a intentar el reto 🔄":"Jugar de nuevo 🔄"}</button>
+      <button class="btn btn-yellow w-full" id="errorsBtn">Estas han sido tus respuestas incorrectas, cópialas en tu cuaderno y vuelve a intentarlo</button>
     </div>`;
   feedback.innerHTML=""; sentenceBox.append(box);
   document.getElementById("playAgainBtn").onclick=reset;
@@ -473,7 +406,6 @@ proBtn.addEventListener("click",()=>{ QUESTIONS_PRO=ensureCoverage(bank(50),50);
 /* Arranque por defecto: Reto rápido (21) */
 useQuestions(QUESTIONS_QUICK,true);
 </script>
-
 </body>
 </html>
 
